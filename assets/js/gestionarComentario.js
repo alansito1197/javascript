@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     obtenerComentarios();
+    obtenerDatosUsuario();
+    const nombreUsuarioInput = document.getElementById('nombreUsuario');
+    const nombreUsuario = localStorage.getItem('nombre') || '';
+    nombreUsuarioInput.value = nombreUsuario;
 });
 
 // Crearemos una función para mostrar todos los comentarios de la página web:
@@ -20,6 +24,7 @@ function obtenerComentarios() {
         return response.json();
     })
 
+    // Con los comentarios obtenidos, hacemos lo siguiente:
     .then(comentarios => {
 
         // Llamamos a la función que devuelve cada comentario en la vista:
@@ -27,39 +32,124 @@ function obtenerComentarios() {
     })
 }
 
+// Crearemos una función para recuperar todos los datos del usuario que ha iniciado sesión:
+function obtenerDatosUsuario() {
+
+    // Enviamos una solicitud al controlador para obtener los datos del usuario que ha iniciado sesión:
+    fetch('http://localhost/trabajo/index.php?controller=api&action=obtenerDatosUsuario', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+
+    // Con el resultado hacemos lo siguiente:
+    .then(response => {
+
+        // Convertimos la respuesta en formato JSON
+        return response.json();
+    })
+
+    // Con los datos obtenidos, hacemos lo siguiente:
+    .then(data => {
+        
+        // Almacenaremos todos los datos del usuario en localStorage:
+        localStorage.setItem('usuario_id', data.usuario_id);
+        localStorage.setItem('nombre', data.nombre);
+        localStorage.setItem('usuario_nombre', data.usuario_nombre);
+        localStorage.setItem('tipo_usuario', data.tipo_usuario);
+        localStorage.setItem('password', data.password);
+        
+    })
+
+    .catch(error => console.log('Error al obtener los datos del usuario:', error));
+}
+
 // Crearemos una función para imprimir comentarios en la vista:
 function imprimirComentariosEnVista(comentarios) {
-
     // Crearemos una variable que se asigne al id del contenedor donde imprimiremos la info de cada comentario:
     let contenedorComentarios = document.getElementById('contenedorComentarios');
 
     // Limpiaremos el contenido anterior para que no se nos junte con cada comentario:
-    contenedorComentarios.innerHTML = ''; 
+    contenedorComentarios.innerHTML = '';
 
     // Utilizaremos un bucle para cada comentario:
     comentarios.forEach(comentario => {
-
-        // Craremos una variable para cada atributo del comentario:
+        // Crearemos una variable para cada atributo del comentario:
         let nombre = comentario["nombre"];
         let opinion = comentario["opinion"];
         let puntuacion = comentario["puntuacion"];
 
-        // Crearemos un nuevo contenedor para cada comentario
+        // Crearemos un nuevo contenedor para cada comentario:
         let contenedorComentario = document.createElement('div');
         contenedorComentario.classList.add('card', 'border', 'border-2', 'p-2', 'mb-3');
+
+        // Crearemos un contenedor para la puntuación:
+        let contenedorPuntuacion = document.createElement('p');
+        contenedorPuntuacion.classList.add('card-text', 'info_apartado_producto');
+        contenedorPuntuacion.innerHTML = `<strong>${nombre}</strong>`;
+
+        // Crearemos un contenedor para las estrellas:
+        let contenedorEstrellas = document.createElement('div');
+        contenedorEstrellas.classList.add('estrellas-container');
+
+        // Agregaremos las estrellas pintadas:
+        for (let i = 0; i < puntuacion; i++) {
+            let estrellaElemento = document.createElement('img');
+            estrellaElemento.src = "assets/imagenes/iconos/valoraciones/estrella_marcada.svg";
+            estrellaElemento.className = "estrella_valoracion";
+            contenedorEstrellas.appendChild(estrellaElemento);
+        }
+
+        // Agregaremos las estrellas sin pintar:
+        for (let i = 0; i < 5 - puntuacion; i++) {
+            let estrellaElemento = document.createElement('img');
+            estrellaElemento.src = "assets/imagenes/iconos/valoraciones/estrella_no_marcada.svg";
+            estrellaElemento.className = "estrella_valoracion";
+            contenedorEstrellas.appendChild(estrellaElemento);
+        }
 
         // Agregaremos el contenido del comentario al nuevo contenedor:
         contenedorComentario.innerHTML = `
             <div class="card-body">
-                <p class="card-text info_apartado_producto" id="nombreUsuario"><strong>${nombre}</strong></p>
+                ${contenedorPuntuacion.outerHTML}
                 <p class="card-text info_apartado_producto" id="opinionComentario">${opinion}</p>
-                <p class="card-text info_apartado_producto" id="puntuacionComentario">Puntuación: ${puntuacion}</p>
             </div>
         `;
 
-        // Agregaremos el nuevo contenedor al contenedor principal
+        // Agregamos el contenedor de estrellas al contenido del comentario:
+        contenedorComentario.querySelector('.card-body').appendChild(contenedorEstrellas);
+
+        // Agregamos el nuevo contenedor al contenedor principal
         contenedorComentarios.appendChild(contenedorComentario);
     });
+}
+
+async function filtrarComentarios() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const puntuacionesSeleccionadas = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => parseInt(checkbox.value));
+
+    console.log("Puntuaciones seleccionadas:", puntuacionesSeleccionadas);
+
+    try {
+        // Obtener todos los comentarios
+        const comentarios = await obtenerComentarios();
+        console.log("Todos los comentarios:", comentarios);
+
+        // Filtrar comentarios según las puntuaciones seleccionadas
+        const comentariosFiltrados = comentarios.filter(comentario =>
+            puntuacionesSeleccionadas.includes(comentario.puntuacion)
+        );
+
+        console.log("Comentarios filtrados:", comentariosFiltrados);
+
+        // Mostrar solo los comentarios filtrados
+        imprimirComentariosEnVista(comentariosFiltrados);
+    } catch (error) {
+        console.error("Error al obtener comentarios:", error);
+    }
 }
 
 // Crearemos una función para agregar un comentario en la base de datos:

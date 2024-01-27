@@ -1001,6 +1001,11 @@
     margin-bottom: 20px;
   }
 
+  .estrella_valoracion{
+    width: 25px;
+    height: 25px;
+  }
+
 /* FIN diseño comentario */
 
 /* INICIO del diseño del QR */
