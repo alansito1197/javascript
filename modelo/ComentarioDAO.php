@@ -63,4 +63,36 @@ class ComentarioDAO {
         // Devolveremos si hemos podido agregar el comentario a la base de datos o no, devolverá 1 (Si) o 2 (No)
         return $resultado;
     }
+
+    // Crearemos una función para obtener comentarios filtrados por puntuación:
+    public static function getComentariosFiltrados($puntuaciones) {
+
+        // Nos conectamos a la base de datos:
+        $conexion = DataBase::connect();
+
+        // Crearemos una consulta para obtener comentarios filtrados por puntuación:
+        $consulta = "SELECT * FROM COMENTARIO WHERE puntuacion IN (" . implode(",", $puntuaciones) . ")";
+        $obtenerComentarios = $conexion->query($consulta);
+
+        // Crearemos una variable como array para guardar en ella todos los comentarios:
+        $comentarios = [];
+
+        // Utilizaremos un bucle para crear un objeto Comentario y la agregaremos a la variable array:
+        while ($row = $obtenerComentarios->fetch_assoc()) {
+            $comentario = [
+                'id_comentario' => $row['id_comentario'],
+                'nombre' => $row['nombre'],
+                'opinion' => $row['opinion'],
+                'puntuacion' => $row['puntuacion']
+            ];
+
+            $comentarios[] = $comentario;
+        }
+
+        // Cerramos la conexión a la base de datos:
+        $conexion->close();
+
+        // Devolveremos la variable como array con los comentarios dentro de él:
+        return $comentarios;
+    }
 }
