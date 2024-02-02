@@ -16,6 +16,13 @@
     font-weight: 600;
   }
 
+  h1 {
+    margin-top: 15px;
+    padding-top: 10px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
   a {
     color: #000;
     text-decoration: none;
@@ -695,6 +702,17 @@
   .boton_enviar_carrito:hover {
     background-color: #616161;
   }
+
+  .resumen {
+    margin-top: 102px;
+  }
+
+  /* .titulo_principal_pagina_carrito{
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 15px;
+    padding-bottom: 30px;
+  } */
 
   /* FIN del diseño del cuadro individual por producto */
 

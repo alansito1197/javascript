@@ -3,6 +3,7 @@
     include_once 'config/dataBase.php';
     include_once 'modelo/ComentarioDAO.php';
     include_once 'modelo/PedidoDAO.php';
+    include_once 'modelo/ProductoDAO.php';
 
     class apiController {
 
@@ -103,23 +104,24 @@
 
         // Decodificamos los datos JSON recibidos en la solicitud:
         $datosFiltro = json_decode(file_get_contents("php://input"), true);
-
+    
         // Verificamos si se proporcionaron puntuaciones para filtrar:
         if (isset($datosFiltro['puntuaciones']) && is_array($datosFiltro['puntuaciones'])) {
-
-            // Llamamos al método que nos devuelve los comentarios filtrados de la base de datos:
-            $comentariosFiltrados = ComentarioDAO::getComentariosFiltrados($datosFiltro['puntuaciones']);
-
-            // Convertimos el array de comentarios filtrados en formato JSON:
+            // Obtener el tipo de ordenamiento (ascendente o descendente)
+            $orden = isset($datosFiltro['orden']) ? $datosFiltro['orden'] : 'ascendente';
+    
+            // Obtener los comentarios filtrados de la base de datos, pasando el tipo de ordenamiento
+            $comentariosFiltrados = ComentarioDAO::getComentariosFiltrados($datosFiltro['puntuaciones'], ['orden']);
+    
+            // Convertir el array de comentarios filtrados en formato JSON y enviar como respuesta
             echo json_encode($comentariosFiltrados, JSON_UNESCAPED_UNICODE);
         } else {
-
-            // Si no se proporcionaron puntuaciones válidas, mostramos un mensaje de error:
+            // Si no se proporcionaron puntuaciones válidas, mostrar un mensaje de error:
             http_response_code(400);
             echo json_encode(array('mensaje' => 'Error en los datos de filtrado'));
         }
     }
-
+    
     // Crearemos una función que nos recupere todos los datos del usuario que ha iniciado sesión: 
     public function obtenerDatosUsuario() {
 
