@@ -13,9 +13,9 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <main class="d-flex justify-content-center">
+    <main>
       <section class="container mt-4">
-        <div class="container col-12 col-sm-6">
+        <div class="container col-12 col-sm-12">
           <div class="row d-flex justify-content-center align-items-center">
             <h3 class="pregunta_login">¡Tu pedido se ha tramitado con éxito!</h3>
             <h2>¡Este es el codigo QR con la información del pedido!</h2>
@@ -25,7 +25,7 @@
               </div>
             </div>
             <h2>¿Qué quieres hacer?</h2>
-            <div class="row">
+            <div class="row d-flex justify-content-center">
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=producto&action=index'?>" method="POST">
                   <button class="boton_negro">Ir a la página principal</button>

@@ -15,7 +15,7 @@
     <main>
       <section class="container mt-4">
         <section>
-          <h2 class="mt-4 titulo_principal_pagina pb-4">Nuestros comentarios</h2>
+          <h1 class="mt-4 titulo_principal_pagina pb-4">Nuestros comentarios</h1>
         </section>
         <section class="row">
           <section class="col-12 col-sm-3">
@@ -24,24 +24,24 @@
               <form id="filtroPuntuacionForm">
                 <label class="titulo_filtro mb-3 mt-3" for="sabor">Filtrar por puntuación</label>
                 <div class="filtro mb-2">
-                  <input class="checkbox" type="checkbox" id="cinco_estrellas" value="cinco_estrellas">
-                  <img src="assets/imagenes/iconos/valoraciones/cinco_estrellas.svg" class="mb-3" alt="Cinco estrellas">
+                  <input class="checkbox" type="checkbox" id="cinco_estrellas" value="5">
+                  <label for ="cinco_estrellas"><img src="assets/imagenes/iconos/valoraciones/cinco_estrellas.svg" class="mb-3" alt="Cinco estrellas"></label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox" type="checkbox" id="cuatro_estrellas" value="cuatro_estrellas">
-                  <img src="assets/imagenes/iconos/valoraciones/cuatro_estrellas.svg" class="mb-3" alt="Cuatro estrellas">
+                  <input class="checkbox" type="checkbox" id="cuatro_estrellas" value="4">
+                  <label for="cuatro_estrellas"><img src="assets/imagenes/iconos/valoraciones/cuatro_estrellas.svg" class="mb-3" alt="Cuatro estrellas"></label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox" type="checkbox" id="tres_estrellas" value="tres_estrellas">
-                  <img src="assets/imagenes/iconos/valoraciones/tres_estrellas.svg" class="mb-3" alt="Tres estrellas">
+                  <input class="checkbox" type="checkbox" id="tres_estrellas" value="3">
+                  <label for="tres_estrellas"><img src="assets/imagenes/iconos/valoraciones/tres_estrellas.svg" class="mb-3" alt="Tres estrellas"></label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox" type="checkbox" id="dos_estrellas" value="dos_estrellas">
-                  <img src="assets/imagenes/iconos/valoraciones/dos_estrellas.svg" class="mb-3" alt="Dos estrellas">
+                  <input class="checkbox" type="checkbox" id="dos_estrellas" value="2">
+                  <label for="dos_estrellas"><img src="assets/imagenes/iconos/valoraciones/dos_estrellas.svg" class="mb-3" alt="Dos estrellas"></label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox" type="checkbox" id="una_estrella" value="una_estrella">
-                  <img src="assets/imagenes/iconos/valoraciones/una_estrella.svg" class="mb-3" alt="Una estrella">
+                  <input class="checkbox" type="checkbox" id="una_estrella" value="1">
+                  <label for="una_estrella"><img src="assets/imagenes/iconos/valoraciones/una_estrella.svg" class="mb-3" alt="Una estrella"></label>
                 </div>
               </form>
             </div>

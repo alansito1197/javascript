@@ -66,8 +66,11 @@
             // Obtenemos el coste de envio llamándo a la función que se encarga de calcularlo:
             $costeEnvio = self::calcularCostoEnvio(self::obtenerOpcionComer());
 
-            // Guardamos la suma del valor del subtotal y del coste del envío en una variable:
-            $precioTotal = $subtotal + $costeEnvio;
+            // Calculamos el 3% del precio total del pedido
+            $propina = 0.03 * ($subtotal + $costeEnvio);
+
+            // Guardamos la suma del valor del subtotal, del coste del envío y del 3% de propina en una variable:
+            $precioTotal = $subtotal + $costeEnvio + $propina;
 
             // Guardamos en una variable de sesión esta última variable creada:
             $_SESSION['precioTotalCarrito'] = $precioTotal;

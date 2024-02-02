@@ -15,7 +15,7 @@
     <main>
       <section class="container mt-4">
           <section>
-            <h2 class="mt-4 titulo_principal_pagina pb-4">Siéntete libre de navegar por nuestra página web</h2>
+            <h1 class="mt-4 titulo_principal_pagina">Siéntete libre de navegar por nuestra página web</h1>
           </section>
           <section>
             <h2 class="py-3 pt-3 mb-3">Categorías destacadas</h2>

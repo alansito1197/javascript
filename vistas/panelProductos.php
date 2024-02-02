@@ -15,39 +15,39 @@
     <main>
       <section class="container mt-4">
         <section>
-          <h2 class="mt-4 titulo_principal_pagina pb-4">Nuestra carta</h2>
+          <h1 class="mt-4 titulo_principal_pagina pb-4">Nuestra carta</h1>
         </section>
         <section class="row">
           <section class="col-12 col-sm-3">
             <hr class="my-2 col-12 col-sm-9">
             <div class="mt-1 mb-4">
-              <form action="productos.php" method="POST">
+              <form id="filtroCategoriaProducto">
                 <label class="titulo_filtro mb-3 mt-2" for="categorias">Filtrar por categoría</label>
                 <div class="filtro mb-2">
-                  <input class="checkbox float-start me-2" type="checkbox" id="categoriaSeleccionada" name="categoriaSeleccionada" value="Bocadillos">
+                  <input class="checkbox float-start me-2" type="checkbox" id="bocadillos" name="categoriaSeleccionada" value="2">
                   <label class="opcion_filtro mb-3" for="bocadillos">Bocadillos</label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox float-start me-2" type="checkbox" id="categoriaSeleccionada" name="categoriaSeleccionada" value="Kebabs">
+                  <input class="checkbox float-start me-2" type="checkbox" id="kebabs" name="categoriaSeleccionada" value="1">
                   <label class="opcion_filtro mb-3" for="kebabs">Kebabs</label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox float-start me-2" type="checkbox" id="categoriaSeleccionada" name="categoriaSeleccionada" value="Pizzas">
+                  <input class="checkbox float-start me-2" type="checkbox" id="pizzas" name="categoriaSeleccionada" value="3">
                   <label class="opcion_filtro mb-3" for="pizzas">Pizzas</label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox float-start me-2" type="checkbox" id="categoriaSeleccionada" name="categoriaSeleccionada" value="Complementos">
+                  <input class="checkbox float-start me-2" type="checkbox" id="complementos" name="categoriaSeleccionada" value="4">
                   <label class="opcion_filtro mb-3" for="complementos">Complementos</label>
                 </div>
                 <div class="filtro mb-2">
-                  <input class="checkbox float-start me-2" type="checkbox" id="categoriaSeleccionada" name="categoriaSeleccionada" value="Bebidas">
+                  <input class="checkbox float-start me-2" type="checkbox" id="bebidas" name="categoriaSeleccionada" value="5">
                   <label class="opcion_filtro mb-3" for="bebidas">Bebidas</label>
                 </div>
               </form>
             </div>
             <hr class="my-2 col-12 col-sm-9">
             <div class="mt-1 mb-2">
-              <form action="filtro_por_precio.php">
+              <form>
                 <label class="titulo_filtro mb-3 mt-2" for="categorias">Filtrar por precio</label>
                 <div class="col-6">
                   <div class="input-group mb-3">
@@ -83,7 +83,7 @@
             </div>
             <hr class="my-2 col-12 col-sm-9">
             <div class="mt-2 mb-4">
-              <form action="filtro_por_disponibilidad.php">
+              <form>
                 <label class="titulo_filtro mb-3 mt-3" for="sabor">Filtrar por disponibilidad</label>
                 <div class="filtro mb-2">
                   <input class="checkbox filtro_disponible float-start me-2" type="checkbox" id="disponible"
@@ -104,7 +104,7 @@
             </div>
             <hr class="my-2 col-12 col-sm-9">
             <div class="mt-2 mb-4">
-              <form action="filtro_por_valoracion.php">
+              <form>
                 <label class="titulo_filtro mb-3 mt-3" for="sabor">Filtrar por valoración</label>
                 <div class="filtro mb-2">
                   <input class="checkbox" type="checkbox" id="cinco_estrellas" value="cinco_estrellas">
@@ -139,7 +139,7 @@
               foreach ($AllProductos as $producto){
               $color_disponibilidad = ProductoDAO::getDisponibilidad($producto->getDisponibilidad());
             ?>
-            <div class="border border-2 contenedor_productos mb-4">
+            <div class="border border-2 contenedor_productos mb-4 <?=$producto->getIdCategoriaProducto()?>">
               <div class="row">
                 <div class="col-4 mb-2 container_izquierda_producto column" style="background-image: url('<?=$producto->getImagen()?>');">
                   <h2 class="mt-2 titulo_producto"><?=$producto->getNombre()?></h2>
@@ -197,5 +197,6 @@
         </section>
       </section>
     </main>
+    <script src="assets/js/gestionarProducto.js"></script>
   </body>
 </html>

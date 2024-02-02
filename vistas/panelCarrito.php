@@ -14,30 +14,28 @@
   <body>
     <main>
       <section class="container mt-4">
-        <section>
-          <h2 class="mt-4 titulo_principal_pagina pb-4">Carrito</h2>
-          <?php
-            include_once 'modelo/Pedido.php';
-            // Calculamos la cantidad total de productos que tenemos en el carrito:
-            $cantidad_productos = count($_SESSION['productosSeleccionados']);
-
-            // Mostramos la cantidad de productos, especificamos que si es 1, aparezca la palabra "producto" y sino "productos"
-            if ($cantidad_productos === 1) {
-              echo "<p>1 producto</p>";
-            } else {
-              echo "<p>$cantidad_productos productos</p>";
-            }
-          ?>
-        </section>
-        <section class="row">
+        <section class="row d-flex justify-content-center">
           <section class="col-12 col-sm-6">
-            <?php
-              $posicionPedido = 0;
-              foreach ($_SESSION['productosSeleccionados'] as $pedidoSerialized) {
-                $pedido = unserialize($pedidoSerialized);
-            ?>
+            <h1 class="titulo_principal_pagina">Carrito</h1>
+              <?php
+                include_once 'modelo/Pedido.php';
+                // Calculamos la cantidad total de productos que tenemos en el carrito:
+                $cantidad_productos = count($_SESSION['productosSeleccionados']);
+
+                // Mostramos la cantidad de productos, especificamos que si es 1, aparezca la palabra "producto" y sino "productos"
+                if ($cantidad_productos === 1) {
+                  echo "<p>1 producto</p>";
+                } else {
+                  echo "<p>$cantidad_productos productos</p>";
+                }
+              ?>
+              <?php
+                $posicionPedido = 0;
+                foreach ($_SESSION['productosSeleccionados'] as $pedidoSerialized) {
+                  $pedido = unserialize($pedidoSerialized);
+              ?>
             <div class="border border-2 contenedor_productos rounded mb-4 pt-5">
-              <div class="row justify-content-between">
+              <div class="row justify-content-between mb-4">
                 <div class="col-6 mb-2 imagen_producto_carrito" style="background-image: url('<?= $pedido->getProducto()->getImagen() ?>');"></div>
                   <div class="row col-6">
                     <p class="nombre_producto"><?= $pedido->getProducto()->getNombre() ?></p>
@@ -54,29 +52,6 @@
                       </form>
                     </div>
                   </div>
-              </div>
-              <div class="row col-11 contenedor_opcion_comer">
-                <form action="<?=url.'?controller=producto&action=personalizarPedido'?>" method='post'>
-                  <h3 class="pregunta">Personaliza tu pedido</h3>
-                  <div class="opcion_comer mb-2">
-                    <input class="checkbox me-2 float-start" type="checkbox" name="opcionComer[]" value="causa_benefica">
-                    <label for="tienda" class="texto_opcion mb-0">Donar para una causa benéfica</label>
-                    <p class="precio_opcion mb-0">1€</p>
-                  </div>
-                  <div class="opcion_comer mb-2">
-                    <input class="checkbox me-2 float-start" type="checkbox" name="opcionComer[]" value="xxl">
-                    <label for="llevar" class="texto_opcion mb-0">Hacer mi producto XXL (50% más grande)</label>
-                    <p class="precio_opcion mb-0">+ 2€</p>
-                  </div>
-                  <div class="opcion_comer mb-2">
-                    <input class="checkbox me-2 float-start" type="checkbox" name="opcionComer[]" value="sin_personalizacion">
-                    <label for="casa" class="texto_opcion mb-0">No deseo personalizar mi pedido</label>
-                    <p class="precio_opcion mb-0">Gratis</p>
-                  </div>
-                  <div class="text-center mt-4">
-                    <button type='submit' class="boton_enviar_carrito" name='producto_personalizado'> Enviar </button>
-                  </div>
-                </form>
               </div>
             </div>
             <?php
@@ -108,8 +83,35 @@
                 </form>
               </div>
             </div>
+            <div class="border border-2 rounded mb-4">
+              <div class="row col-sm-11 contenedor_opcion_comer">
+                <form>
+                  <h3 class="pregunta">¿Quieres dejar una propina?</h3>
+                  <div class="opcion_comer mb-2">
+                    <input type="radio" class="checkbox float-start me-2" name="opcionPropina" value="0">
+                    <label for="tienda" class="texto_opcion mb-0">No quiero dejar una propina</label>
+                    <p class="precio_opcion mb-0">0%</p>
+                  </div>
+                  <div class="opcion_comer mb-2">
+                    <input type="radio" class="checkbox float-start me-2" name="opcionPropina" value="0.03" checked>
+                    <label for="tienda" class="texto_opcion mb-0">Quiero dejar una propina pequeña</label>
+                    <p class="precio_opcion mb-0">3%</p>
+                  </div>
+                  <div class="opcion_comer mb-2">
+                    <input type="radio" class="checkbox float-start me-2" name="opcionPropina" value="0.10">
+                    <label for="llevar" class="texto_opcion mb-0">Quiero dejar una propina mediana</label>
+                    <p class="precio_opcion mb-0">10%</p>
+                  </div>
+                  <div class="opcion_comer mb-2">
+                    <input type="radio" class="checkbox float-start me-2" name="opcionPropina" value="0.21">
+                    <label for="casa" class="texto_opcion mb-0">Quiero dejar una propina grande</label>
+                    <p class="precio_opcion mb-0">21%</p>
+                  </div>
+                </form>
+              </div>
+            </div>
           </section>
-          <section class="col-12 col-sm-4">
+          <section class="col-12 col-sm-4 resumen">
             <div class="fondo_resumen">
               <div class="margenes_laterales_resumen">
                 <div class="col-12 margen_superior_resumen">
@@ -129,6 +131,10 @@
                         echo "<p class='precio_productos_envio'>Por definir</p>";
                       }
                     ?>
+                  </div>
+                  <div class="contenedor_precio_envio">
+                    <p class="texto_producto_envio float-start">Coste de la propina</p>
+                    
                   </div>
                   <hr class="col-12 col-sm-12 hr_sin_margin">
                   <div class="contenedor_precio_total mt-2">

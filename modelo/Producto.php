@@ -125,5 +125,16 @@
                 return $this;
         }
 
+        public function getIdCategoriaProducto()
+        {
+                return $this->id_categoria_producto;
+        }
+
+        public function setIdCategoriaProducto($id_categoria_producto): self
+        {
+                $this->id_categoria_producto = $id_categoria_producto;
+
+                return $this;
+        }
         }
 ?>
