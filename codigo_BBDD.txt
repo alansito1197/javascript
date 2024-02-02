@@ -192,10 +192,10 @@ INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `s
 VALUES ('2', '3', 'Pizza de fruta de los bosques', 'Dulce', 900,  12.99, 'Proximamente', 0, 'assets/imagenes/productos/pizzas/pizza_fruta.png', '500 g de harina, 100 g de queso mozzarella, 250 g de frutas del bosque (fresas, frambuesas y moras).', 'assets/imagenes/iconos/valoraciones/tres_estrellas.svg','No','Masa dura');
 
 INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `sabor`, `valor_energetico`, `precio`, `disponibilidad`, `stock`, `imagen`, `ingredientes`, `valoracion`,`producto_destacado`)
-VALUES ('1', '2', 'Delicia Octoplena', 'Salado', 350, 8.99, 'Disponible online', 33, 'assets/imagenes/productos/complementos/pulpo.png', 'Pulpo cocido, patatas, pimentón de la Vera, aceite de oliva virgen extra, sal gruesa y hojas de perejil.','assets/imagenes/iconos/valoraciones/cinco_estrellas.svg','Si');
+VALUES ('1', '4', 'Delicia Octoplena', 'Salado', 350, 8.99, 'Disponible online', 33, 'assets/imagenes/productos/complementos/pulpo.png', 'Pulpo cocido, patatas, pimentón de la Vera, aceite de oliva virgen extra, sal gruesa y hojas de perejil.','assets/imagenes/iconos/valoraciones/cinco_estrellas.svg','Si');
 
 INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `sabor`, `valor_energetico`, `precio`, `disponibilidad`, `stock`, `imagen`, `ingredientes`, `valoracion`,`producto_destacado`)
-VALUES ('2', '2', 'Croquetas de la Abuela', 'Salado', 480, 5.99, 'Proximamente', 0, 'assets/imagenes/productos/complementos/croquetas.png', '
+VALUES ('2', '4', 'Croquetas de la Abuela', 'Salado', 480, 5.99, 'Proximamente', 0, 'assets/imagenes/productos/complementos/croquetas.png', '
 Pimienta, 2 tazas de leche, nuez moscada, 1 taza de jamón cocido, sal, queso, aceite, pan rallado y huevo.', 'assets/imagenes/iconos/valoraciones/cuatro_estrellas.svg', 'Si');
 
 INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `sabor`, `valor_energetico`, `precio`, `disponibilidad`, `stock`, `imagen`, `ingredientes`, `valoracion`,`producto_destacado`)
@@ -216,8 +216,10 @@ VALUES ('1', '5', 'Malteado de café', 'Dulce', 3838, 4.99, 'Disponible online',
 INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `sabor`, `valor_energetico`, `precio`, `disponibilidad`, `stock`, `imagen`, `ingredientes`, `valoracion`,`producto_destacado`)
 VALUES ('2', '5', 'Mountain New', 'Dulce', 180, 1.99, 'No disponible', 0,  'assets/imagenes/productos/bebidas/mountain_new.png', 'Agua carbonatada, jarabe de maíz, acidulante, azúcar, ácido cítrico, cafeína y zumo de uva blanca.', 'assets/imagenes/iconos/valoraciones/cero_estrellas.svg','No');
 
--- Creamos unos comentario:
+-- Creamos los comentarios:
 
 INSERT INTO `COMENTARIO`(`nombre`, `opinion`, `puntuacion`) VALUES ('Alan','Super web, es la mejor que existe y existirá jamás porque patata.', '5');
 
 INSERT INTO `COMENTARIO`(`nombre`, `opinion`, `puntuacion`) VALUES ('Marc','Esta web es una bazofia, una vez compré y me sacaron todo el dinero del banco, le cortaron un brazo a mi mujer y decapitaron a mi bebé.', '1');
+
+INSERT INTO `COMENTARIO`(`nombre`, `opinion`, `puntuacion`) VALUES ('Yeray','¿Por qué la defensa del Atlético de Madrid es la defensa colchonera? Porque siempre se duerme.', '4');
