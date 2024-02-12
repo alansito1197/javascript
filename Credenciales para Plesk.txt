@@ -1,0 +1,3 @@
+Nombre de la base de datos: Restaurante
+Nombre de usuario: alansito1197
+Contraseña: fondo_sur1197
